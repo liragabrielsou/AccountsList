@@ -1,5 +1,6 @@
 package com.example.accountslist
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.accountslist.databinding.ActivityListBinding
+import com.google.android.material.snackbar.Snackbar
 
 class ListActivity : AppCompatActivity() {
 
@@ -36,6 +38,36 @@ class ListActivity : AppCompatActivity() {
             this.position = position
         }
 
+        binding.editButton.setOnClickListener{
+
+            var i = Intent(this,UpdateActivity::class.java)
+
+            i.putExtra("id",binding.id.text.toString().toInt())
+
+            startActivity(i)
+
+        }
+
+        binding.deleteButton.setOnClickListener {
+            val value = database.deleteUser((binding.id.text.toString().toInt()))
+
+            if(value != 0){
+                Snackbar.make(
+                    binding.root,
+                    "Usuário excluido !",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+
+            listUsers = database.readUsers()
+            adapter = setAdapter(listUsers)
+            binding.listRegisters.adapter = adapter
+
+        }
+
+        binding.homeButton.setOnClickListener{
+            startActivity(Intent(this,MainActivity::class.java))
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

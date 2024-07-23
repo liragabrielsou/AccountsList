@@ -1,5 +1,6 @@
 package com.example.accountslist
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity() {
                     .setTextColor(resources.getColor(R.color.white))
                     .show()
             }
+        }
+
+        binding.listButton.setOnClickListener{
+            startActivity(Intent(this,ListActivity::class.java))
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

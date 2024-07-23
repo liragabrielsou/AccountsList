@@ -8,75 +8,101 @@
     tools:context=".ListActivity">
 
     <TextView
+        android:id="@+id/updateText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#275D9E"
+        android:fontFamily="@font/concert_one"
+        android:gravity="center"
+        android:text="Usuários Cadastrados"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="60dp"
+        android:paddingBottom="55dp">
+
+        <ListView
+            android:id="@+id/listRegisters"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contextClickable="true"
+            android:listSelector="@color/BabyBlue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="683dp">
+
+
+        <Button
+            android:id="@+id/homeButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#275D9E"
+            android:drawableBottom="@drawable/home_24px"
+            android:drawableTint="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Button
+            android:id="@+id/listButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#275D9E"
+            android:drawableBottom="@drawable/subject_24px"
+            android:drawableTint="#000000"
+            app:iconTint="@color/black" />
+
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/id"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone" />
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="119dp">
+        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listRegisters"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/editButton"
-        android:layout_width="60dp"
-        android:layout_height="70dp"
-        tools:layout_editor_absoluteX="335dp"
-        tools:layout_editor_absoluteY="490dp" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="60dp"
-        android:layout_height="70dp"
-        tools:layout_editor_absoluteX="335dp"
-        tools:layout_editor_absoluteY="568dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="669dp">
-
-        <Button
-            android:id="@+id/button3"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="#D50404"
-            android:text="Button"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="180dp"
+            app:backgroundTint="#8F68D7"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
 
-        <Button
-            android:id="@+id/button4"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Button" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="100dp"
+            app:backgroundTint="#9E1515"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
 
-    <TextView
-        android:id="@+id/listText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="LISTAR"
-        android:textSize="24dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="59dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

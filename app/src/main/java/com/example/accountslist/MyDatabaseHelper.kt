@@ -60,6 +60,35 @@ class MyDatabaseHelper (context: Context):
         return users
     }
 
+    fun readById(id:Int):List<User>{
+        val users= mutableListOf<User>()
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT idUsers FROM user Where = '$id'",null)
+
+        cursor.use{
+            while (it.moveToNext()){
+                var idIndex =it.getColumnIndex("idUser")
+                var nomeIndex=it.getColumnIndex("nome")
+                var senhaIndex=it.getColumnIndex("senha")
+                var emailIndex =it.getColumnIndex("email")
+                var telefoneIndex=it.getColumnIndex("telefone")
+
+                users.add(
+                    User(
+                        it.getInt(idIndex),
+                        it.getString(nomeIndex),
+                        it.getString(senhaIndex),
+                        it.getString(emailIndex),
+                        it.getString(telefoneIndex),
+                    )
+                )
+
+            }
+        }
+        return users
+    }
+
     //Função de inseção de Usuários
     fun insertUser(nome:String,senha:String,email:String,telefone:String):Long{
         val user= ContentValues().apply {
@@ -72,7 +101,7 @@ class MyDatabaseHelper (context: Context):
     }
 
     //Função de Atualização de Usuários
-    fun updateUser(user:User):Int{
+    fun updateUser (user:User):Int{
         val values = ContentValues().apply {
             put("nome",user.username)
             put("senha",user.password)
@@ -88,7 +117,7 @@ class MyDatabaseHelper (context: Context):
     }
 
     //Função de Exclusão de Usuários
-    fun delete (id:Int):Int{
+    fun deleteUser (id:Int):Int{
         return writableDatabase.delete("user","idUser = ?", arrayOf(id.toString()))
     }
 
