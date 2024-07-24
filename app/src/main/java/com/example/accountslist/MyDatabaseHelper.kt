@@ -65,7 +65,7 @@ class MyDatabaseHelper (context: Context):
         val users= mutableListOf<User>()
 
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM user Where id = ?",null)
+        val cursor = db.rawQuery("SELECT * FROM user WHERE idUser = ?", arrayOf(id.toString()))
 
         cursor.use{
             while (it.moveToNext()){

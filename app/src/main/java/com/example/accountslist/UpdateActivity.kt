@@ -18,20 +18,22 @@ class UpdateActivity : AppCompatActivity() {
 
         val database = MyDatabaseHelper(this)
 
-        val intentId = intent.extras
+        val intentId = intent
 
-        var listInput = database.readById(intentId.toString().toInt())
+        intentId.getStringExtra("id").toString().toInt()
 
-        binding.inputName.setText(listInput.get(intentId.toString().toInt()).username)
-        binding.inputPass.setText(listInput.get(intentId.toString().toInt()).password)
-        binding.inputEmail.setText(listInput.get(intentId.toString().toInt()).email)
-        binding.inputPhone.setText(listInput.get(intentId.toString().toInt()).cellphone)
+        var listInput = database.readById(intentId.getStringExtra("id").toString().toInt())
+
+        binding.inputName.setText(listInput.get(0).username)
+        binding.inputPass.setText(listInput.get(0).password)
+        binding.inputEmail.setText(listInput.get(0).email)
+        binding.inputPhone.setText(listInput.get(0).cellphone)
 
 
 
 
         binding.updateButton.setOnClickListener {
-            var id = intentId.toString().toInt()
+            var id = intentId.getStringExtra("id").toString().toInt()
             var nome = binding.inputName.text.toString()
             var telefone = binding.inputPhone.text.toString()
             var email = binding.inputEmail.text.toString()
