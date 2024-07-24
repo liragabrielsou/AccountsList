@@ -23,15 +23,11 @@ class ListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val database = MyDatabaseHelper(this)
-
         var listUsers = database.readUsers()
-        var adapter = setAdapter(listUsers)
-
+        var adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,listUsers)
         binding.listRegisters.adapter = adapter
 
-        listUsers = database.readUsers()
-        adapter = setAdapter(listUsers)
-        binding.listRegisters.adapter = adapter
+
 
         binding.listRegisters.setOnItemClickListener { parent, view, position, id ->
             binding.id.text = listUsers.get(position).id.toString()
@@ -39,13 +35,7 @@ class ListActivity : AppCompatActivity() {
         }
 
         binding.editButton.setOnClickListener{
-
-            var i = Intent(this,UpdateActivity::class.java)
-
-            i.putExtra("id",binding.id.text.toString().toInt())
-
-            startActivity(i)
-
+            startActivity(Intent(this,UpdateActivity::class.java).putExtra("id",binding.id.text))
         }
 
         binding.deleteButton.setOnClickListener {
@@ -60,13 +50,16 @@ class ListActivity : AppCompatActivity() {
             }
 
             listUsers = database.readUsers()
-            adapter = setAdapter(listUsers)
+            adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,listUsers)
             binding.listRegisters.adapter = adapter
+
+            adapter.notifyDataSetChanged()
 
         }
 
         binding.homeButton.setOnClickListener{
             startActivity(Intent(this,MainActivity::class.java))
+            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

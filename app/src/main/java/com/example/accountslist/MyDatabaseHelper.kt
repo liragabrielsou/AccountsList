@@ -16,7 +16,8 @@ class MyDatabaseHelper (context: Context):
                 "nome TEXT NOT NULL,"+
                 "senha TEXT NOT NULL,"+
                 "email TEXT NOT NULL,"+
-                "telefone NOT NULL);"
+                "telefone TEXT NOT NULL);",
+                "INSERT INTO user VALUES (null,'admin','admin','admin@teste.com', '000');"
     )
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -64,7 +65,7 @@ class MyDatabaseHelper (context: Context):
         val users= mutableListOf<User>()
 
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT idUsers FROM user Where = '$id'",null)
+        val cursor = db.rawQuery("SELECT * FROM user Where id = ?",null)
 
         cursor.use{
             while (it.moveToNext()){

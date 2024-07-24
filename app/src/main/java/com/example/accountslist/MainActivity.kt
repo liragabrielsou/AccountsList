@@ -20,31 +20,30 @@ class MainActivity : AppCompatActivity() {
 
         val database = MyDatabaseHelper(this)
 
-
-        //Variaveis para uso de inputs facilitados
-        val inputName = binding.inputName.text.toString()
-        val inputPass = binding.inputPass.text.toString()
-        val inputEmail = binding.inputEmail.text.toString()
-        val inputPhone = binding.inputPhone.text.toString()
-
         binding.registerButton.setOnClickListener {
-            if (!inputName.trim().isEmpty() &&
-                !inputPass.trim().isEmpty()&&
-                !inputEmail.isEmpty()&&
-                !inputPhone.trim().isEmpty()
+            if (!binding.inputName.text.toString().trim().isEmpty() &&
+                !binding.inputPass.text.toString().trim().isEmpty() &&
+                !binding.inputEmail.text.toString().trim().isEmpty()&&
+                !binding.inputPhone.text.toString().trim().isEmpty()
             ) {
 
-                val value = database.insertUser(inputName,inputPass,inputEmail,inputPhone)
+                val value = database.insertUser(
+                    binding.inputName.text.toString()
+                    ,binding.inputPass.text.toString()
+                    ,binding.inputEmail.text.toString()
+                    ,binding.inputPhone.text.toString())
 
                 if(value > -1){
                     Snackbar.make(
                         binding.root,
-                        "Usuário " + inputName +" foi cadastrado com sucesso!",
+                        "Usuário " + binding.inputName.text.toString() +" foi cadastrado com sucesso!",
                         Snackbar.LENGTH_LONG
                     ).setBackgroundTint(resources.getColor(R.color.LightYellow))
                         .setTextColor(resources.getColor(R.color.white))
                         .show()
                 }
+
+                database.readUsers()
 
                 //adapter.notifyDataSetChanged()
                 ClearFields()
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.listButton.setOnClickListener{
             startActivity(Intent(this,ListActivity::class.java))
+            finish()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

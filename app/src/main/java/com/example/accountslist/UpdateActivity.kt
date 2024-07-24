@@ -20,7 +20,14 @@ class UpdateActivity : AppCompatActivity() {
 
         val intentId = intent.extras
 
-        database.readById(intentId.toString().toInt()) as User
+        var listInput = database.readById(intentId.toString().toInt())
+
+        binding.inputName.setText(listInput.get(intentId.toString().toInt()).username)
+        binding.inputPass.setText(listInput.get(intentId.toString().toInt()).password)
+        binding.inputEmail.setText(listInput.get(intentId.toString().toInt()).email)
+        binding.inputPhone.setText(listInput.get(intentId.toString().toInt()).cellphone)
+
+
 
 
         binding.updateButton.setOnClickListener {
@@ -37,8 +44,6 @@ class UpdateActivity : AppCompatActivity() {
             startActivity(Intent(this,ListActivity::class.java))
             finish()
         }
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
